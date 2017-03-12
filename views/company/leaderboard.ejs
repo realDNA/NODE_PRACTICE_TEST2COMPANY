@@ -11,20 +11,16 @@
 	            <ul>
 	                <li><a href="/">Home</a></li> |
 	                <li><a href="/companies">All Companies</a></li>
+                    <li><a href="#">Leaderboard</a></li>
 	            </ul>
 	        </div>
             
             <div class="bodyDiv">
-            <h4 style="">Companies</h4>  
+            <h4 style="">Leaderboard</h4>  
                 
-                <% arrayAverage = function(arr) {
-                    return _.reduce(arr, (num1, num2) => {
-                        return num1 + num2;
-                    }, 0) / (arr.length === 0 ? 1 : arr.length);
-                } %>
-                
+              
                 <% for(i=0; i<data.length; i++){ %>   
-                    <% var total = arrayAverage(data[i].ratingNumber) %>
+                    <% var index = _.indexOf(data, data[i]) %>
 				    <div class="col-xs-12 col-md-6 col-lg-4 companyListDiv">
                         <a href="/company-profile/<%= data[i]._id%>">
                             <img src="/uploads/<%= data[i].image%>" class="companyListItemLogo">
@@ -32,11 +28,9 @@
                             <div class="companyListItemInfo">
                                 <h5 class=""><%= data[i].name %></h5>
                                 <span class="">
-                                    <i class="star" data-score="<%= total %>"></i>
-                                    (<%= data[i].ratingNumber.length %>)
+                                    <%= data[i].ratingSum %> Total Stars
                                 </span><br>
-                                <i class="fa fa-building-o "> <%= data[i].sector %> </i><br>
-                                <i class="fa fa-map-marker "> <%= data[i].city %> </i>
+                                <h5>#<%= index + 1 %></h5>
                             </div>
                         </a>
                     </div>  
