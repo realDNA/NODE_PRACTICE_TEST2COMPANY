@@ -51,7 +51,7 @@ module.exports = (app, passport) => {
         res.redirect('/home');
     });//local.signup name from passport
     
-    app.get('/home',(req,res)=>{
+    app.get('/home',isLoggedIn,(req,res)=>{
         console.log('listening ........home');
         console.log(req.user)
         res.render('user/home', {title: 'Home || RateMe', user: req.user});
@@ -252,5 +252,13 @@ function loginValidate(req,res,next){
     }
     else{
         return next();
+    }
+}
+
+function isLoggedIn(req,res,next){
+    if(req.isAuthenticated()){
+        next();
+    }else{
+        res.redirect('/');
     }
 }
